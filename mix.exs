@@ -13,9 +13,9 @@ defmodule Canada.Mixfile do
   end
 
   def package do
-    [contributors: ["Jared Norman"],
+    [contributors: ["Jared Norman", "Fabian Keunecke"],
      licenses: ["MIT"],
-     links: %{github: "https://github.com/jarednorman/canada"}]
+     links: %{github: "https://github.com/Fabi755/canada"}]
   end
 
   def application do
