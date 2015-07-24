@@ -1,4 +1,4 @@
 defprotocol Canada.Can do
   @doc "Evaluates permissions"
-  def can?(subject, action, resource)
+  def can?(user, action, subject, extra_arguments \\ [])
 end

@@ -1,7 +1,7 @@
 defmodule Canada do
-  defmacro can?(subject, {action, _, [argument]}) do
+  defmacro can?(user, {action, _, [subject|extra_arguments]}) do
     quote do
-      Canada.Can.can? unquote(subject), unquote(action), unquote(argument)
+      Canada.Can.can? unquote(user), unquote(action), unquote(subject), unquote(extra_arguments)
     end
   end
 end
