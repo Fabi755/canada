@@ -8,6 +8,7 @@ readable declarative permission rules.
 Installation
 ------------
 
+<!--
 Add it to your deps list in your `mix.exs`. You want the latest release?
 
 ```elixir
@@ -15,12 +16,13 @@ defp deps do
   [{:canada, "~> 1.0.0"}]
 end
 ```
+-->
 
-You want the latest master?
+Add it to your deps list in your `mix.exs`. You want the latest master?
 
 ```elixir
 defp deps do
-  [{:canada, github: "jarednorman/canada"}]
+  [{:canada, github: "Fabi755/canada"}]
 end
 ```
 
