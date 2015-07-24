@@ -6,14 +6,20 @@ defmodule Post do
   defstruct user_id: nil
 end
 
+defmodule Comment do
+  defstruct post_id: nil
+end
+
 defimpl Canada.Can, for: User do
-  def can?(%User{id: user_id}, action, %Post{user_id: user_id})
+  def can?(%User{id: user_id}, action, %Post{user_id: user_id}, [])
     when action in [:update, :read, :destroy, :touch], do: true
 
-  def can?(%User{admin: admin}, action, _)
+  def can?(%User{admin: admin}, action, _, [])
     when action in [:update, :read, :destroy, :touch], do: admin
 
-  def can?(%User{verified: verified}, :create, Post), do: verified
+  def can?(%User{verified: verified}, :create, Post, []), do: verified
+
+  def can?(%User{verified: verified}, :comment, Post, [[comments_allowed: comments_allowed]]), do: verified && comments_allowed
 end
 
 defmodule CanadaTest do
@@ -54,5 +60,12 @@ defmodule CanadaTest do
     assert admin_user |> can? create(Post)
     assert user |> can? create(Post)
     refute other_user |> can? create(Post)
+  end
+
+  test "it identifies whether a user can comment a post" do
+    assert user |> can? comment(Post, comments_allowed: true)
+    refute other_user |> can? comment(Post, comments_allowed: true)
+    refute user |> can? comment(Post, comments_allowed: false)
+    refute other_user |> can? comment(Post, comments_allowed: false)
   end
 end
